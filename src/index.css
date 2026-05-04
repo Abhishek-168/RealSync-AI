@@ -1,0 +1,20 @@
+/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Unbounded:wght@200..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* base layers */
+  --color-background: #FCFAF9;
+  --color-surface: #0c1821;
+  --color-elevated: #1b2a41;
+
+  /* primary UI */
+  --color-primary: #324a5f;
+
+  /* text */
+  --color-text: #ccc9dc;
+  --color-text-muted: #324a5f;
+
+  --font-headings: 'Unbounded', cursive, sans-serif;
+  --font-body: 'Google Sans', sans-serif;
+}
