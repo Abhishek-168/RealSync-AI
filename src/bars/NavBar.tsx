@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-
+// This is our home page navbar, which is used across the entire app. It contains links to the main pages of the app, as well as a login and signup button. The navbar is responsive and will collapse into a hamburger menu on smaller screens.
 
 export default function NavBar() {
     const navigate = useNavigate();

@@ -14,12 +14,12 @@ export default function PuzzleArena() {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const [positions, setPositions] = useState<Record<PieceId, Position>>({
-    rect1: { x: 10, y: 0 },
-    rect2: { x: 334, y: 134 },
-    rect3: { x: 234, y: 284 },
-    rect4: { x: 475, y: 213 },
-    rect5: { x: 300, y: 200 },
-    rect6: { x: 10, y: 340 },
+    rect1: { x: 120, y: 10 },
+    rect3: { x: 300, y: 30 },
+    rect2: { x: 480, y: 10 },
+    rect4: { x: 200, y: 170 },
+    rect5: { x: 380, y: 180 },
+    rect6: { x: 300, y: 310 },
   });
 
   const activeId = useRef<PieceId | null>(null);
@@ -77,10 +77,10 @@ export default function PuzzleArena() {
   }[] = [
     { id: "rect1", src: "/images/rect1.png", className: "w-50" },
     { id: "rect2", src: "/images/rect2.png", className: "w-50" },
-    { id: "rect3", src: "/images/rect3.png", className: "w-45" },
-    { id: "rect4", src: "/images/rect4.png", className: "w-45" },
-    { id: "rect5", src: "/images/rect5.png", className: "w-40" },
-    { id: "rect6", src: "/images/rect6.png", className: "w-40" },
+    { id: "rect3", src: "/images/rect3.png", className: "w-50" },
+    { id: "rect4", src: "/images/rect4.png", className: "w-50" },
+    { id: "rect5", src: "/images/rect5.png", className: "w-50" },
+    { id: "rect6", src: "/images/rect6.png", className: "w-50" },
   ];
 
   return (
