@@ -1,4 +1,4 @@
-import PuzzleArena from "./component/PuzzleArena";
+import PuzzleArena from "../components/PuzzleArena";
 
 export default function Hero() {
   return (
