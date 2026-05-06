@@ -1,18 +1,22 @@
 import { useEffect, useState } from 'react'
-import Bar2 from './component/appbar1.js'
-import Menu from './component/menu.js'
-import Mid from './component/codespace.js'
-import Folder from './component/folder.js'
-import Right from './component/right.js'
+    
 import { RecoilRoot } from 'recoil'
 import { useParams } from 'react-router-dom'
-import { io } from 'socket.io-client'
+import { io, type Socket } from 'socket.io-client'
+import Bar2 from '../components/appbar1';
+import Folder from '../components/folder';
+import Menu from '../components/menu';
+import Mid from '../components/codespace';
+import Right from '../components/right';
 
 function Workspace(){
     const { roomId } = useParams();
-    const [openFiles, setOpenFiles] = useState([]);
-    const [activeFile, setActiveFile] = useState(null);
-    const [socket, setSocket] = useState(null);
+    type FileRecord = { path: string; content: string };
+    type FileTuple = [string, string];
+
+    const [openFiles, setOpenFiles] = useState<FileRecord[]>([]);
+    const [activeFile, setActiveFile] = useState<string | null>(null);
+    const [socket, setSocket] = useState<Socket | null>(null);
     const [lastUpdate, setLastUpdate] = useState(Date.now());
 
     // Initialize socket connection
@@ -47,7 +51,7 @@ function Workspace(){
                 const response = await fetch(`http://localhost:5000/file-updates?roomId=${roomId}`);
                 if (!response.ok) throw new Error('Failed to fetch updates');
                 
-                const data = await response.json();
+                const data = (await response.json()) as { files: FileTuple[] };
                 const newFiles = data.files.map(([path, content]) => ({
                     path,
                     content
@@ -70,7 +74,7 @@ function Workspace(){
     useEffect(() => {
         if (socket && roomId) {
             // Handle initial files update
-            socket.on('files-update', (files) => {
+            socket.on('files-update', (files: FileTuple[]) => {
                 console.log('Received files update:', files);
                 const newOpenFiles = files.map(([path, content]) => ({
                     path,
@@ -83,7 +87,7 @@ function Workspace(){
             });
 
             // Handle file updates from other users
-            socket.on('file-update', ({ filePath, content }) => {
+            socket.on('file-update', ({ filePath, content }: { filePath: string; content: string }) => {
                 console.log('Received file update:', filePath, content);
                 setOpenFiles(prevFiles => {
                     const existingFileIndex = prevFiles.findIndex(file => file.path === filePath);
@@ -103,7 +107,7 @@ function Workspace(){
         }
     }, [socket, roomId]);
 
-    const handleFileClick = (content, filePath) => {
+    const handleFileClick = (content: string, filePath: string) => {
         console.log('File clicked:', filePath, content);
         // Check if file is already open
         const existingFileIndex = openFiles.findIndex(file => file.path === filePath);
@@ -124,7 +128,7 @@ function Workspace(){
         setActiveFile(filePath);
     };
 
-    const handleCloseFile = (filePath) => {
+    const handleCloseFile = (filePath: string) => {
         setOpenFiles(prev => prev.filter(file => file.path !== filePath));
         
         // If we're closing the active file, set a new active file
@@ -134,7 +138,7 @@ function Workspace(){
         }
     };
 
-    const handleTabClick = (filePath) => {
+    const handleTabClick = (filePath: string) => {
         setActiveFile(filePath);
     };
 
@@ -153,7 +157,7 @@ function Workspace(){
             }}>
                 <Menu roomId={roomId} />
                 <Folder onFileClick={handleFileClick} />
-                <Mid 
+                <Mid
                     openFiles={openFiles}
                     activeFile={activeFile}
                     onCloseFile={handleCloseFile}
