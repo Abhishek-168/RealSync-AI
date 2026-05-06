@@ -4,16 +4,20 @@ import './index.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import Signup from './pages/Signup';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
+const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-   <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App/>} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
-    </BrowserRouter>
+    <GoogleOAuthProvider clientId={clientId}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App/>} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
     
   </StrictMode>,
 )
