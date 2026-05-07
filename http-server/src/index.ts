@@ -3,7 +3,6 @@ import cors from "cors";
 // import jwt from "jsonwebtoken";
 import { googleAuthSchema, signupSchema } from "./schemas/auth.schema";
 
-
 const app = express();
 app.use(cors(
     {
@@ -21,6 +20,7 @@ app.post("/auth/signup", (req, res) => {
         res.status(400).json({ error: validateData.error });
         return;
     }
+
 
     // db query to create user with validateData.data
     // jwt sign with user id and send back to client in HttpOnly cookie
