@@ -2,6 +2,8 @@ import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { googleAuthSchema, signupSchema } from "../schemas/auth.schema";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -23,9 +25,10 @@ export default function Signup() {
 
     // BE call to signup endpoint with validateData.data
     try {
+
       const res = await axios.post(`${backendUrl}/auth/signup`, validateData.data, { withCredentials: true });
       if (res.status === 200) {
-        navigate("/");
+        navigate("/features");
       }
       console.log("Signup successful:", res.data);
     } catch (error) {
@@ -38,6 +41,7 @@ export default function Signup() {
       console.error("No credential received from Google");
       return;
     }
+    console.log("Sending google auth request with data:", jwtDecode(credentialResponse.credential));
     const validateData = googleAuthSchema.safeParse({
       credential: credentialResponse.credential,
     });
@@ -50,9 +54,10 @@ export default function Signup() {
     // BE call to Google auth endpoint with validateData.data
     // credential true for cookies to be set from BE response
     try {
+    
       const res = await axios.post(`${backendUrl}/auth/google`, validateData.data, { withCredentials: true });
       if (res.status === 200) {
-        navigate("/");
+        navigate("/features");
       }
       console.log("Google auth successful:", res.data);
     } catch (error) {
@@ -129,6 +134,7 @@ export default function Signup() {
           </div>
           <GoogleLogin
             onSuccess={(credentialResponse: CredentialResponse) =>
+      
               handleGoogleLogin(credentialResponse)
             }
             onError={() => {
