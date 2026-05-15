@@ -9,6 +9,7 @@
     "dev": "nodemon --exec ts-node src/index.ts"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
@@ -18,11 +19,15 @@
     "fs-extra": "^11.2.0",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^8.0.3",
+    "pg": "^8.20.0",
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.6.0",
+    "@types/pg": "^8.20.0",
     "nodemon": "^3.1.14",
     "prisma": "^7.8.0",
     "ts-node": "^10.9.2",
