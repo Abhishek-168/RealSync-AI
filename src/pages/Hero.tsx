@@ -29,16 +29,16 @@ export default function Hero() {
           </div>
           <div className="flex gap-28 mt-13 ml-1 ">
             <div>
-              <span className="text-3xl font-bold text-surface">10K+</span>
-              <span className="block text-sm text-gray-600">Active Users</span>
+              <span className="text-3xl font-bold text-surface">650+</span>
+              <span className="block text-sm text-gray-600">Students reached</span>
             </div>
             <div>
-              <span className="text-3xl font-bold text-surface">50M+</span>
+              <span className="text-3xl font-bold text-surface">100K+</span>
               <span className="block text-sm text-gray-600">Lines Coded</span>
             </div>
             <div>
-              <span className="text-3xl font-bold text-surface">99.9%</span>
-              <span className="block text-sm text-gray-600">Uptime</span>
+              <span className="text-3xl font-bold text-surface">10+</span>
+              <span className="block text-sm text-gray-600">Instructors</span>
             </div>
           </div>
         </div>
